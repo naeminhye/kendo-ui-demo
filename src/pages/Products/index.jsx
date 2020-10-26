@@ -145,8 +145,8 @@ const CustomGrid = (props) => {
                 <Column field="ProductID" title="Id" width="50px" editable={false} />
                 <Column field="ProductName" title="Product Name" width="250px" /* cell={Input} */ />
                 <Column field="FirstOrderedOn" title="First Ordered" width="250px" editor="date" format="{0:d}" />
-                <Column field="UnitsInStock" title="Units" width="100px" /* cell={InputNumber} */ />
-                <Column field="Discontinued" title="Discontinued" /* cell={Checkbox} */ />
+                <Column field="UnitsInStock" title="Units" width="100px" editor="numeric" /* cell={InputNumber} */ />
+                <Column field="Discontinued" title="Discontinued" editor="boolean" /* cell={Checkbox} */ />
                 <Column cell={CommandCell} width="240px" />
             </Grid>
         </div>

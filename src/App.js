@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from './pages/Home';
 import Footer from './pages/Footer';
 
-import Grid from "./pages/Grid";
+import Grid from "./pages/Products";
 import Form from "./pages/Form";
 import Others from "./pages/Others";
 
