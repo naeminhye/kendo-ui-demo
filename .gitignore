@@ -1,0 +1,18 @@
+# Don't check auto-generated stuff into git
+coverage
+build
+node_modules
+stats.json
+package-lock.json
+
+# Cruft
+.DS_Store
+npm-debug.log
+.idea
+
+# misc
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
