@@ -4,16 +4,22 @@ import { MyCommandCell } from './myCommandCell.jsx';
 import { Grid, GridColumn as Column, GridToolbar } from '@progress/kendo-react-grid';
 import { process } from '@progress/kendo-data-query';
 
+import { connect } from 'react-redux';
+
 // Antd
 import Button from 'antd/es/button';
 
 import 'antd/es/button/style/css';
 
 // Customized Components
-import Input from './components/Input';
-import Checkbox from './components/Checkbox';
-import InputNumber from './components/InputNumber';
+// import Input from './components/Input';
+// import Checkbox from './components/Checkbox';
+// import InputNumber from './components/InputNumber';
 import Pagination from './components/Pagination';
+
+const mapStateToProps = (state) => ({
+  products: state.products,
+});
 
 const CustomGrid = (props) => {
     const editField = "inEdit";
