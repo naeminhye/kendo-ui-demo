@@ -16,12 +16,14 @@ export default handleActions(
         return state;
     },
     [actions.removeProduct]: (state, { payload }) => {
+        let newData = [...state]
         let item = payload;
-        let index = state.findIndex(p => p === item || item.ProductID && p.ProductID === item.ProductID);
+        let index = state.findIndex(p => (p === item) || (item.ProductID && p.ProductID === item.ProductID));
         if (index >= 0) {
-            state.splice(index, 1);
+            newData.splice(index, 1);
         }
-        return state;
+
+        return newData;
     },
     [actions.updateProduct]: (state, { payload }) => {
         let item = payload;

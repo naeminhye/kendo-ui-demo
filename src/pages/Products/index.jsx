@@ -1,10 +1,10 @@
-﻿import React, { useState } from 'react';
-// import { sampleProducts } from '../../data/sample-products';
+﻿import React, { useState, useEffect } from 'react';
 import { MyCommandCell } from './myCommandCell.jsx';
 import { Grid, GridColumn as Column, GridToolbar } from '@progress/kendo-react-grid';
 import { process } from '@progress/kendo-data-query';
 
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import * as actions from './actions'
 
@@ -23,17 +23,26 @@ const mapStateToProps = (state) => ({
   products: state.products,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    addProduct: (product) => dispatch(actions.addProduct(product)),
-    removeProduct: (product) => dispatch(actions.removeProduct(product)),
-    updateProduct: (product) => dispatch(actions.updateProduct(product)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//     fetchProducts: () => dispatch(actions.fetchProducts()),
+//     addProduct: (product) => dispatch(actions.addProduct(product)),
+//     removeProduct: (product) => dispatch(actions.removeProduct(product)),
+//     updateProduct: (product) => dispatch(actions.updateProduct(product)),
+// });
+
+const mapDispatchToProps = {
+    fetchProducts: actions.fetchProducts,
+    addProduct: actions.addProduct,
+    removeProduct: actions.removeProduct,
+    updateProduct: actions.updateProduct
+};
+  
 
 const CustomGrid = (props) => {   
     const editField = "inEdit";
     const [data, setData] = useState(props.products);
     const [dataState, setDataState ] = useState({skip: 0, take: 10 });
-
+    
     const generateId = data => data.reduce((acc, current) => Math.max(acc, current.ProductID), 0) + 1;
 
     const removeItem = (data, item) => {
@@ -154,4 +163,12 @@ const CustomGrid = (props) => {
     );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomGrid);
+const enhance = compose(
+    connect(
+      mapStateToProps,
+      mapDispatchToProps,
+    ),
+);
+  
+  
+export default enhance(CustomGrid);
