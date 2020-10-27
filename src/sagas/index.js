@@ -1,8 +1,8 @@
 import { call, all } from 'redux-saga/effects';
-import productDetailSaga from '../pages/ProductDetail/sagas';
+import FormSaga from '../pages/Form/saga';
 
 export default function* rootSaga() {
   yield all([
-    call(productDetailSaga),
+    call(FormSaga),
   ])
 }

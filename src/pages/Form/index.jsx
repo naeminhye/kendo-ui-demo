@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import FormContainer from './components/Form';
-import * as actions from './actions';
+import * as actions from './action';
 
 const DemoForm = () => {
-  const store = useSelector(state => state.productDetail);
+  const store = useSelector(state => state.form);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(actions.getProductDetail())
+    dispatch(actions.getForm())
   }, [dispatch])
 
   const getProduct = useMemo(() => {
