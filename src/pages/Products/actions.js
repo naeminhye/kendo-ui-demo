@@ -13,3 +13,7 @@ export const addProduct = createAction(
 export const removeProduct = createAction(  
     `${PRODUCT_NAMESPACE}/${ActionTypes.REMOVE_PRODUCT}`,
 );
+
+export const updateProduct = createAction(  
+    `${PRODUCT_NAMESPACE}/${ActionTypes.UPDATE_PRODUCT}`,
+);

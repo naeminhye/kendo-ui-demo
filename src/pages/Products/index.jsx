@@ -1,10 +1,12 @@
 ﻿import React, { useState } from 'react';
-import { sampleProducts } from '../../common/sample-products';
+// import { sampleProducts } from '../../common/sample-products';
 import { MyCommandCell } from './myCommandCell.jsx';
 import { Grid, GridColumn as Column, GridToolbar } from '@progress/kendo-react-grid';
 import { process } from '@progress/kendo-data-query';
 
 import { connect } from 'react-redux';
+
+import * as actions from './actions'
 
 // Antd
 import Button from 'antd/es/button';
@@ -21,10 +23,16 @@ const mapStateToProps = (state) => ({
   products: state.products,
 });
 
-const CustomGrid = (props) => {
+const mapDispatchToProps = (dispatch) => ({
+    addProduct: (product) => dispatch(actions.addProduct(product)),
+    removeProduct: (product) => dispatch(actions.removeProduct(product)),
+    updateProduct: (product) => dispatch(actions.updateProduct(product)),
+});
+
+const CustomGrid = (props) => {   
     const editField = "inEdit";
-    const [data, setData] = useState(sampleProducts);
-    const [dataState, setDataState ] = useState({skip: 0, take: 10 })
+    const [data, setData] = useState(props.products);
+    const [dataState, setDataState ] = useState({skip: 0, take: 10 });
 
     const generateId = data => data.reduce((acc, current) => Math.max(acc, current.ProductID), 0) + 1;
 
@@ -35,7 +43,6 @@ const CustomGrid = (props) => {
         }
     }
 
-
     const enterEdit = (dataItem) => {
         setData(data.map(item =>
             item.ProductID === dataItem.ProductID ?
@@ -44,19 +51,13 @@ const CustomGrid = (props) => {
     }
 
     const remove = (dataItem) => {
-
-        const newData = [...data];
-        removeItem(newData, dataItem);
-        removeItem(sampleProducts, dataItem);
-        setData([...newData]);
+        props.removeProduct(dataItem);
     }
 
     const add = (dataItem) => {
         dataItem.inEdit = undefined;
-        dataItem.ProductID = generateId(sampleProducts);
-
-        sampleProducts.unshift(dataItem);
-        setData([...data])
+        dataItem.ProductID = generateId(props.products);
+        props.addProduct(dataItem)
     }
 
     const discard = (dataItem) => {
@@ -67,17 +68,17 @@ const CustomGrid = (props) => {
     }
 
     const update = (dataItem) => {
-        const newData = [...data]
+        // const newData = [...data]
         const updatedItem = { ...dataItem, inEdit: undefined };
 
-        updateItem(newData, updatedItem);
-        updateItem(sampleProducts, updatedItem);
+        // updateItem(newData, updatedItem);
+        props.updateProduct(updatedItem);
 
-        setData(newData);
+        // setData(newData);
     }
 
     const cancel = (dataItem) => {
-        const originalItem = sampleProducts.find(p => p.ProductID === dataItem.ProductID);
+        const originalItem = props.products.find(p => p.ProductID === dataItem.ProductID);
         const newData = data.map(item => item.ProductID === originalItem.ProductID ? originalItem : item);
 
         setData(newData);
@@ -104,7 +105,7 @@ const CustomGrid = (props) => {
     }
 
     const cancelCurrentChanges = () => {
-        setData([...sampleProducts]);
+        setData([...props.products]);
     }
     let CommandCell = MyCommandCell({
         edit: enterEdit,
@@ -153,4 +154,4 @@ const CustomGrid = (props) => {
     );
 }
 
-export default CustomGrid;
+export default connect(mapStateToProps, mapDispatchToProps)(CustomGrid);

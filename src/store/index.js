@@ -5,9 +5,8 @@ import createSagaMiddleware from 'redux-saga';
 const saga = createSagaMiddleware();
 
 const store = compose(
-  applyMiddleware(saga),
   window.devToolsExtension && window.devToolsExtension(),
-)(createStore(rootReducer));
+)(createStore)(rootReducer);
 
 // saga.run()
 

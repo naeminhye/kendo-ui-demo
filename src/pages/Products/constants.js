@@ -7,5 +7,6 @@ export const productInitalState = sampleProducts || [];
 export const ActionTypes = {
     GET_PRODUCTS: 'getProducts',
     ADD_PRODUCT: 'addProduct',
-    REMOVE_PRODUCT: 'removeProduct'
+    REMOVE_PRODUCT: 'removeProduct',
+    UPDATE_PRODUCT: 'updateProduct',
 }
