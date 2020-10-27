@@ -8,6 +8,7 @@ import Footer from './pages/Footer';
 import Products from "./pages/Products";
 import Form from "./pages/Form";
 import Others from "./pages/Others";
+import GridDemo from './pages/Grid';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path = "/products" component={Products} />
           <Route path = "/Form" component={Form} />
+          <Route path = "/grid-demo" component={GridDemo} />
           <Route path = "/Others" component={Others} />
         </div>
         <div className="footer">
