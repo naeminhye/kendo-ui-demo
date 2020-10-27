@@ -1,24 +1,40 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import FormContainer from './components/Form';
 import * as actions from './action';
+import Button from 'antd/es/button'
 
 const DemoForm = () => {
   const store = useSelector(state => state.form);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const getDetailForm = useMemo(() => {
+    return store.data
+  }, [store.data])
+
+  const onSubmit = useCallback((data) => {
+    console.log('data', data);
+    dispatch(actions.addForm(data))
+  }, [dispatch])
+
+  const getDetail = useCallback(() => {
     dispatch(actions.getForm())
   }, [dispatch])
 
-  const getProduct = useMemo(() => {
-      return store.data
-  }, [store.data])
+  return (
+    <div className="container my-3">
+      <div className='col-12 col-lg-12'>
+        <div className="row example-wrapper">
+          <div className="col-xs-12 col-sm-6 offset-sm-3 example-col">
+            <Button onClick={getDetail} type='primary' className="my-3" >Get Detail</Button>
+            <div className="card-block">
+              <FormContainer onSubmit={onSubmit} initialValues={getDetailForm} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 
-  const onSubmit = () => {
-    alert("submit")
-  }
-
-  return <FormContainer onSubmit={onSubmit} initialValues={getProduct} />
 }
 export default DemoForm;

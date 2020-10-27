@@ -1,63 +1,96 @@
-﻿import React, { memo, useState } from 'react';
-import { Input, Checkbox } from '@progress/kendo-react-inputs';
-import { DatePicker } from '@progress/kendo-react-dateinputs';
-import { Form, Field } from '@progress/kendo-react-form';
+﻿import React, { memo } from 'react';
+import FormComponent from './../../../components/Form/index';
 
-const emailRegex = new RegExp(/\S+@\S+\.\S+/);
-const emailValidator = (value) => (emailRegex.test(value) ? "" : "Please enter a valid email.");
-
-const EmailInput = (fieldRenderProps) => {
-    const { validationMessage, visited, ...others } = fieldRenderProps;
-    return (
-        <div>
-            <Input {...others} />
-            {
-                visited && validationMessage &&
-                (<div className={"k-required"}>{validationMessage}</div>)
-            }
-        </div>
-    );
-};
+import * as Validators from './validatiors'
 
 const ProductForm = memo((props) => {
 
     const { onSubmit, initialValues } = props
 
+    const dataFields = [
+        {
+            id: 'fullName',
+            name: 'fullName',
+            label: 'Full Name',
+            type: 'input',
+            placeholder: 'Ex: Demo Form',
+            validator: Validators.nameValidator
+
+        },
+        {
+            id: 'phoneNumber',
+            name: 'phoneNumber',
+            label: 'Phone Number',
+            placeholder: '(999) 000-00-00-00',
+            hint: 'Hint: Your active phone number.',
+            type: 'phone',
+            validator: Validators.phoneValidator
+        },
+        {
+            id: 'email',
+            name: 'email',
+            label: 'Email',
+            hint: 'Hint: Enter your personal email address.',
+            type: 'email',
+            placeholder: 'demo@gmail.com',
+            validator: Validators.emailValidator
+
+        },
+        {
+            id: 'arrivalDate',
+            name: 'arrivalDate',
+            label: 'Arrival Date',
+            hint: 'Hint: Should be greater than today',
+            type: 'date',
+            placeholder: '20/10/2020',
+            validator: Validators.arrivalDateValidator
+
+        },
+        {
+            id: 'nightsCount',
+            name: 'nightsCount',
+            label: 'Number of Nights',
+            format: 'n0',
+            type: 'numeric',
+            placeholder: '1',
+            validator: Validators.nightsValidator
+
+        },
+        {
+            id: 'guestsCount',
+            name: 'guestsCount',
+            label: 'Number of Guests',
+            hint: 'Hint: Maximum 5 guests.',
+            format: 'n0',
+            type: 'numeric',
+            placeholder: '1',
+            validator: Validators.guestsValidator
+
+        },
+        {
+            id: 'comments',
+            name: 'comments',
+            label: 'Comments',
+            optional: true,
+            type: 'textArea',
+        },
+        {
+            id: 'terms',
+            name: 'terms',
+            label: 'I agree with terms and conditions',
+            type: 'checkbox',
+            validator: Validators.termsValidator
+
+        }
+
+    ]
     return (
-        <div className="container-fluid">
-            <div className='col-12 col-lg-9 border-right'>
-                <div className="row example-wrapper">
-                    <div className="col-xs-12 col-sm-6 offset-sm-3 example-col">
-                        <div className="card-block">
-                            <Form
-                                initialValues={initialValues}
-
-                                key={JSON.stringify(initialValues)}
-                                onSubmit={onSubmit}
-                                render={(formRenderProps) => (
-                                    <form onSubmit={formRenderProps.onSubmit} className={'k-form'}>
-                                        <fieldset>
-                                            <legend>User Details</legend>
-                                            <Field name={'firstName'} component={Input} label={'First name'} />
-                                            <Field name={'lastName'} component={Input} label={'Last name'} />
-                                            <div style={{ marginTop: '1rem' }}>
-                                                <Field name={'dateOfBirth'} component={DatePicker} label={'Date of Birth'} />
-                                            </div>
-                                            <Field name={"email"} type={"email"} component={EmailInput} label={"Email"} validator={emailValidator} />
-                                            <Field name={'company'} component={Input} label={'Your Company'} />
-                                        </fieldset>
-
-                                        <div className="text-right">
-                                            <button type="button" className="k-button" onClick={formRenderProps.onFormReset}>Clear</button> &nbsp;
-                                <button type="submit" className="k-button k-primary" disabled={!formRenderProps.allowSubmit}>Submit</button>
-                                        </div>
-                                    </form>
-                                )} />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <FormComponent
+            initialValues={initialValues}
+            onSubmit={onSubmit}
+            dataFields={dataFields}
+            title='DEMO FORM COMPONENT'
+        />
     )
 })
 

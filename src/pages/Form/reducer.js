@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 
-import { FormInitalState } from './constant';
+import { FormInitialState } from './constant';
 
 import * as actions from './action';
 
@@ -20,6 +20,22 @@ export default handleActions(
       loading: false,
       error: payload
     }),
+
+    [actions.addForm]: (state) => ({
+      ...state,
+      loading: true,
+    }),
+    [actions.addFormSuccess]: (state, { payload }) => ({
+      ...state,
+      data: payload,
+      loading: false
+    }),
+    [actions.addFormFail]: (state, { payload }) => ({
+      ...state,
+      loading: false,
+      error: payload
+    }),
+    
   },
-  FormInitalState
+  FormInitialState
 );

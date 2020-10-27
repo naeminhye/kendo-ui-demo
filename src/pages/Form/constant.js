@@ -1,15 +1,16 @@
 export const FORM_DETAIL_NAMESPACE = 'FORM_DETAIL';
 
-export const FormInitalState = {
+export const FormInitialState = {
   data: {
-    firstName: '',
-    lastName: '',
-    dateOfBirth: null,
+    fullName: '',
+    phoneNumber: '',
+    arrivalDate: new Date(),
+    dateOfBirth: '',
     email: '',
-    company: '',
-    userName: '',
-    password: '',
-    twoFactor: false
+    nightsCount: 0,
+    guestsCount: 0,
+    comments: '',
+    terms: false
   },
   loading: false,
   error: null,
