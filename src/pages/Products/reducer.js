@@ -6,7 +6,7 @@ import * as actions from './actions';
 
 export default handleActions(
   {
-    [actions.getProducts]: (state) => ({
+    [actions.fetchProducts]: (state) => ({
       ...state,
     }),
     [actions.addProduct]: (state, { payload }) => {

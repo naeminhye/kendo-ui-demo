@@ -2,8 +2,8 @@ import { createAction } from 'redux-actions';
 
 import { PRODUCT_NAMESPACE, ActionTypes } from './constants';
 
-export const getProducts = createAction(  
-    `${PRODUCT_NAMESPACE}/${ActionTypes.GET_PRODUCTS}`,
+export const fetchProducts = createAction(  
+    `${PRODUCT_NAMESPACE}/${ActionTypes.FETCH_PRODUCTS}`,
 );
 
 export const addProduct = createAction(  
