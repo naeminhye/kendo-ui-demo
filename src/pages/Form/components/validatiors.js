@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { getter } from '@progress/kendo-react-common';
 
 const emailRegex = new RegExp(/\S+@\S+\.\S+/);

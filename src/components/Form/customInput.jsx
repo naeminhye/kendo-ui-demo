@@ -1,5 +1,4 @@
 import * as React from 'react';
-import moment from 'moment'
 import { FieldWrapper } from '@progress/kendo-react-form';
 import {
   Input, MaskedTextBox, NumericTextBox,
